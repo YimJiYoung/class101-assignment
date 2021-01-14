@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
+import Logo from './Logo';
 
 const Header = styled.header`
   position: fixed;
@@ -28,7 +29,7 @@ interface IProps {
 const Layout = ({ children }: IProps) => (
   <>
     <Header>
-      <h1> CLASS 101 </h1>
+      <Logo />
     </Header>
     <Content>
       {children}
