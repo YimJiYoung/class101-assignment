@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { ShoppingCartOutlined } from '@ant-design/icons';
 import Logo from './Logo';
 
 const Header = styled.header`
@@ -16,6 +18,7 @@ const Header = styled.header`
   align-items: center;
 
   border-bottom: 1px solid #d1d5da;
+  background-color: white;
 `;
 
 const Content = styled.main`
@@ -29,7 +32,12 @@ interface IProps {
 const Layout = ({ children }: IProps) => (
   <>
     <Header>
-      <Logo />
+      <Link to="/">
+        <Logo />
+      </Link>
+      <Link to="/cart">
+        <ShoppingCartOutlined style={{ color: 'black', fontSize: 25 }} />
+      </Link>
     </Header>
     <Content>
       {children}
