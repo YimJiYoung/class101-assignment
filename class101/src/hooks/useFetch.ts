@@ -1,8 +1,6 @@
-import {
-  useState, useEffect, Dispatch, SetStateAction,
-} from 'react';
+import { useState, useEffect } from 'react';
 
-function useFetch<T>(url: string): [T[], Dispatch<SetStateAction<T[]>>] {
+function useFetch<T>(url: string) {
   const [data, setData] = useState<T[]>([]);
 
   useEffect(() => {
@@ -14,7 +12,7 @@ function useFetch<T>(url: string): [T[], Dispatch<SetStateAction<T[]>>] {
       .catch((err) => console.log(err));
   }, []);
 
-  return [data, setData];
+  return [data, setData] as const;
 }
 
 export default useFetch;
