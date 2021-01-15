@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import {
+  useState, useEffect, Dispatch, SetStateAction,
+} from 'react';
 
-function useFetch(url: string) {
-  const [data, setData] = useState([]);
+function useFetch<T>(url: string): [T[], Dispatch<SetStateAction<T[]>>] {
+  const [data, setData] = useState<T[]>([]);
 
   useEffect(() => {
     fetch(url)
