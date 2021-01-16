@@ -1,10 +1,10 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import ProductItem from './ProductItem';
-import IProduct from '../../types/product';
+import { Product } from '../../types';
 
 interface IProps {
-    products: IProduct[];
+    products: Product[];
 }
 
 const ProductList = ({ products }: IProps) => (

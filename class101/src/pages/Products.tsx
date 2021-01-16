@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { Typography } from 'antd';
 import ProductList from '../components/common/ProductList';
-import IProduct from '../types/product';
+import { Product } from '../types';
 import usePagination from '../hooks/usePagination';
 import useFetch from '../hooks/useFetch';
 
@@ -14,12 +14,12 @@ const PaginationWrapper = styled.div`
 `;
 
 function Products() {
-  const [products] = useFetch<IProduct>('data/productItems.json');
+  const [products] = useFetch<Product>('data/productItems.json');
 
-  const sortProductByScore = (_products: IProduct[]) => [..._products].sort((a, b) => b.score - a.score);
+  const sortProductByScore = (_products: Product[]) => [..._products].sort((a, b) => b.score - a.score);
   const sortedProducts = useMemo(() => sortProductByScore(products), [products]);
 
-  const [currentProducts, renderPagination] = usePagination<IProduct>(sortedProducts, 5);
+  const [currentProducts, renderPagination] = usePagination<Product>(sortedProducts, 5);
 
   return (
     <>
