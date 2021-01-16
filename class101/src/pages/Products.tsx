@@ -1,9 +1,12 @@
 import React, { useContext, useMemo } from 'react';
 import styled from 'styled-components';
+import { Typography } from 'antd';
 import ProductList from '../components/common/ProductList';
 import productContext from '../contexts/productContext';
 import IProduct from '../types/product';
 import usePagination from '../hooks/usePagination';
+
+const { Title } = Typography;
 
 const PaginationWrapper = styled.div`
   margin: 30px;
@@ -20,6 +23,7 @@ function Products() {
 
   return (
     <>
+      <Title level={2}> 상품 목록 </Title>
       <ProductList products={currentProducts} />
       <PaginationWrapper>
         {renderPagination()}
