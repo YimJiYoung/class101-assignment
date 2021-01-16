@@ -9,15 +9,10 @@ interface IProps {
 
 const ProductList = ({ products }: IProps) => (
   <Row justify="space-around">
-    { products && products.map(({
-      id, title, coverImage, price,
-    }) => (
-      <Col xs={24} md={4} key={id}>
+    { products && products.map((product) => (
+      <Col xs={24} md={4} key={product.id}>
         <ProductItem
-          id={id}
-          title={title}
-          coverImage={coverImage}
-          price={price}
+          item={product}
         />
       </Col>
     ))}
