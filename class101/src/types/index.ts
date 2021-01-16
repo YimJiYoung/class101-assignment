@@ -13,5 +13,5 @@ export interface GlobalState {
 
 export interface Action {
     type: string;
-    payload: Product | number;
+    payload: Product | string;
 }

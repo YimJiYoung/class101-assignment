@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import { Card, Image } from 'antd';
 import CartButton from './CartButton';
 import { useGlobalContext } from '../../contexts/GlobalProvider';
-import { ADD_TO_CART } from '../../constants/actions';
+import { ADD_TO_CART, REMOVE_FROM_CART } from '../../constants/actions';
 import { Product } from '../../types';
 
 const { Meta } = Card;
@@ -18,8 +18,15 @@ const ButtonWrapper = styled.div`
 
 const ProductItem = ({ item }: IProps) => {
   const { title, coverImage, price } = item;
-  const [isInCart, setIsInCart] = useState(false);
-  const [_, dispatch] = useGlobalContext();
+  const [state, dispatch] = useGlobalContext();
+  const inCartIdList = state.cart.map((product) => product.id);
+  const [isInCart, SetIsInCart] = useState(inCartIdList.includes(item.id));
+
+  const handleCartButtonClick = () => {
+    if (!isInCart) dispatch({ type: ADD_TO_CART, payload: item });
+    else dispatch({ type: REMOVE_FROM_CART, payload: item.id });
+    SetIsInCart(!isInCart);
+  };
 
   return (
     <Card
@@ -30,13 +37,9 @@ const ProductItem = ({ item }: IProps) => {
         description={`가격: ${price}`}
       />
       <ButtonWrapper>
-        {/* TODO : 장바구나 담기/빼기 로직 구현 */}
         <CartButton
           isInCart={isInCart}
-          handleClick={() => {
-            dispatch({ type: ADD_TO_CART, payload: item });
-            setIsInCart(!isInCart);
-          }}
+          handleClick={handleCartButtonClick}
         />
       </ButtonWrapper>
     </Card>
