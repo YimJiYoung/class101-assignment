@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { Typography } from 'antd';
-import ProductList from '../components/common/ProductList';
+import ProductList from '../components/Products/ProductList';
 import { Product } from '../types';
 import usePagination from '../hooks/usePagination';
 import useFetch from '../hooks/useFetch';

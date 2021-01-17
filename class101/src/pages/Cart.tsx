@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from 'antd';
 import { useGlobalContext } from '../contexts/GlobalProvider';
-import ProductList from '../components/common/ProductList';
+import ProductList from '../components/Products/ProductList';
 
 const { Title } = Typography;
 

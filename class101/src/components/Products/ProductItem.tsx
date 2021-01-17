@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
 import { Card, Image } from 'antd';
-import CartButton from './CartButton';
+import CartButton from '../common/CartButton';
 import { useGlobalContext } from '../../contexts/GlobalProvider';
 import { ADD_TO_CART, REMOVE_FROM_CART } from '../../constants/actions';
 import { Product } from '../../types';
