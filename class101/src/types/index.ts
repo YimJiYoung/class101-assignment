@@ -7,6 +7,13 @@ export interface Product {
     availableCoupon?: boolean;
 }
 
+export interface CartItem {
+    id: string;
+    price: number;
+    amount: number;
+    availableCoupon?: boolean;
+}
+
 export interface GlobalState {
     cart: Product[];
 }
