@@ -14,6 +14,13 @@ export interface CartItem {
     availableCoupon?: boolean;
 }
 
+export interface Coupon {
+    type: 'rate' | 'amount';
+    title: string;
+    discountRate?: number;
+    discountAmount?: number;
+}
+
 export interface GlobalState {
     cart: Product[];
 }
