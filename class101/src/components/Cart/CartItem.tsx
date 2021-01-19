@@ -8,7 +8,7 @@ const { Title } = Typography;
 
 interface IProps {
     item: Product;
-    onCheck: (isChecked: boolean, item: ICartItem) => void;
+    onCheck: (item: ICartItem) => void;
     onAmountChange: (id: string, amount: number) => void;
 }
 
@@ -16,17 +16,15 @@ const CartItem = ({ item, onCheck, onAmountChange }: IProps) => {
   const { id, price, availableCoupon } = item;
 
   const [amount, setAmount] = useState(1);
-  const [isChecked, setIsChecked] = useState(false);
 
   const handleAmoutChange = (number: number | string | null | undefined) => {
     if (!number) return;
-    if (isChecked) onAmountChange(id, amount);
+    onAmountChange(id, +number);
     setAmount(+number);
   };
 
   const handleCheck = () => {
-    setIsChecked(!isChecked);
-    onCheck(!isChecked, {
+    onCheck({
       id, price, availableCoupon, amount,
     });
   };
@@ -36,7 +34,6 @@ const CartItem = ({ item, onCheck, onAmountChange }: IProps) => {
       <Row align="middle">
         <Col span={1}>
           <Checkbox
-            value={isChecked}
             onChange={handleCheck}
           />
         </Col>

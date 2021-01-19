@@ -14,12 +14,19 @@ function Cart() {
 
   const { cart } = state;
 
-  const handleCheck = (isChecked: boolean, item: ICartItem) => {
-    if (isChecked) setCheckedItems([...checkedItems, item]);
+  const isCheckedItem = (id: string) => {
+    const index = checkedItems.findIndex((_item) => _item.id === id);
+    return index !== -1;
+  };
+
+  const handleCheck = (item: ICartItem) => {
+    if (!isCheckedItem(item.id)) setCheckedItems([...checkedItems, item]);
     else setCheckedItems(checkedItems.filter((_item) => _item.id !== item.id));
   };
 
   const handleAmountChange = (id: string, amount: number) => {
+    if (!isCheckedItem(id)) return;
+
     setCheckedItems(checkedItems.map((_item) => {
       if (_item.id !== id) return _item;
       return { ..._item, amount };
