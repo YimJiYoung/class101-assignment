@@ -8,11 +8,10 @@ interface IProps {
   children: ReactNode;
 }
 
-export const GlobalContext = createContext<[GlobalState, React.Dispatch<Action>]|null>(null);
+export const GlobalContext = createContext<[GlobalState, React.Dispatch<Action>]>([{ cart: [] }, () => null]);
 
 export function useGlobalContext() {
   const context = useContext(GlobalContext);
-  if (!context) throw new Error('State and Dispatch not found');
   return context;
 }
 
