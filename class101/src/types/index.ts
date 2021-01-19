@@ -14,11 +14,16 @@ export interface CartItem {
     availableCoupon?: boolean;
 }
 
-export interface Coupon {
-    type: 'rate' | 'amount';
+export type Coupon = {
+    type: 'rate';
+    title: string;
+    discountRate: number;
+    discountAmount?: number;
+} | {
+    type: 'amount';
     title: string;
     discountRate?: number;
-    discountAmount?: number;
+    discountAmount: number;
 }
 
 export interface GlobalState {
