@@ -1,36 +1,44 @@
-import React, { useState, Dispatch, SetStateAction } from 'react';
+import React, { useState } from 'react';
 import {
   Card, Image, Typography, Checkbox, Row, Col, InputNumber,
 } from 'antd';
-import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { Product, CartItem as ICartItem } from '../../types';
 
 const { Title } = Typography;
 
 interface IProps {
     item: Product;
-    createHandleCheck: (item : ICartItem) => (e: CheckboxChangeEvent) => void;
+    onCheck: (isChecked: boolean, item: ICartItem) => void;
+    onAmountChange: (id: string, amount: number) => void;
 }
 
-const CartItem = ({ item, createHandleCheck }: IProps) => {
+const CartItem = ({ item, onCheck, onAmountChange }: IProps) => {
+  const { id, price, availableCoupon } = item;
+
   const [amount, setAmount] = useState(1);
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleAmoutChange = (number: number | string | null | undefined) => {
     if (!number) return;
+    if (isChecked) onAmountChange(id, amount);
     setAmount(+number);
   };
 
-  const { id, price, availableCoupon } = item;
-
-  const handleCheck = createHandleCheck({
-    id, price, availableCoupon, amount,
-  });
+  const handleCheck = () => {
+    setIsChecked(!isChecked);
+    onCheck(!isChecked, {
+      id, price, availableCoupon, amount,
+    });
+  };
 
   return (
     <Card>
       <Row align="middle">
         <Col span={1}>
-          <Checkbox onChange={handleCheck} />
+          <Checkbox
+            value={isChecked}
+            onChange={handleCheck}
+          />
         </Col>
         <Col span={4}>
           <Image src={item.coverImage} alt={item.title} height={100} width={100} preview={false} />
