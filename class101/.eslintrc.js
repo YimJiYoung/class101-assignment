@@ -35,6 +35,8 @@ module.exports = {
     'no-use-before-define': 'off',
     'no-unused-vars': 'warn',
     '@typescript-eslint/no-use-before-define': ['error'],
+    'max-len': 'off',
+    'react/require-default-props': 'off',
   },
   settings: {
     'import/resolver': {
