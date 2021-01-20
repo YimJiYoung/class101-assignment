@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { Card, Image } from 'antd';
-import CartButton from '../common/CartButton';
+import CartButton from './CartButton';
 import { useGlobalContext } from '../../contexts/GlobalProvider';
 import { ADD_TO_CART, REMOVE_FROM_CART } from '../../constants/actions';
 import { Product } from '../../types';
@@ -19,13 +19,17 @@ const ButtonWrapper = styled.div`
 const ProductItem = ({ item }: IProps) => {
   const { title, coverImage, price } = item;
   const [state, dispatch] = useGlobalContext();
-  const inCartIdList = state.cart.map((product) => product.id);
-  const [isInCart, SetIsInCart] = useState(inCartIdList.includes(item.id));
+
+  const checkInCart = (id: string) => {
+    const index = state.cart.findIndex((_item) => _item.id === id);
+    return index !== -1;
+  };
+
+  const isInCart = useMemo(() => checkInCart(item.id), [item, state.cart]);
 
   const handleCartButtonClick = () => {
     if (!isInCart) dispatch({ type: ADD_TO_CART, payload: item });
     else dispatch({ type: REMOVE_FROM_CART, payload: item.id });
-    SetIsInCart(!isInCart);
   };
 
   return (

@@ -4,6 +4,7 @@ import { Product, GlobalState, Action } from '../types';
 function reducer(state: GlobalState, action: Action):GlobalState {
   switch (action.type) {
     case ADD_TO_CART:
+      if (state.cart.length >= 3) return state;
       return { ...state, cart: [...state.cart, action.payload as Product] };
     case REMOVE_FROM_CART:
       return { ...state, cart: state.cart.filter((product) => product.id !== (action.payload as string)) };
