@@ -22,8 +22,8 @@ const CouponSelect = ({ coupons, onSelect } :IProps) => (
       dropdownMatchSelectWidth={false}
       onSelect={onSelect}
     >
-      {coupons.map((coupon) => (
-        <Option value={coupon.title}>{coupon.title}</Option>
+      {coupons.map((coupon, idx) => (
+        <Option key={idx} value={coupon.title}>{coupon.title}</Option>
       ))}
     </Select>
   </SelectWrapper>

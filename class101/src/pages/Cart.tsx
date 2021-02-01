@@ -36,7 +36,7 @@ function Cart() {
   return (
     <>
       <Title level={2}> 상품 목록 </Title>
-      { cart.length > 0 ? cart.map((item) => <CartItem item={item} onCheck={handleCheck} onAmountChange={handleAmountChange} />)
+      { cart.length > 0 ? cart.map((item) => <CartItem key={item.id} item={item} onCheck={handleCheck} onAmountChange={handleAmountChange} />)
         : <Typography> 장바구니에 담긴 상품이 없습니다 </Typography>}
       <Payment items={checkedItems} />
     </>
